@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="28JuneTestSuite" thread-count="1">
+
+	<test name="1">
+		<classes>
+			<class name="softpac_final.FD_Joint_Executor" />
+		</classes>
+	</test>
+
+	<test name="2">
+		<classes>
+			<class name="softpac_final.FD_Single_Executor" />
+		</classes>
+	</test>
+
+	<test name="3">
+		<classes>
+			<class name="softpac_final.IndividualModification_ExcelExec" />
+		</classes>
+	</test>
+
+	<test name="4">
+		<classes>
+			<class name="softpac_final.MemRegNI_ExcelExecutor" />
+		</classes>
+	</test>
+
+	<test name="5">
+		<classes>
+			<class name="softpac_final.MemRegNI_Joint_ExcelExecutor" />
+		</classes>
+	</test>
+
+	<test name="6">
+		<classes>
+			<class name="softpac_final.NonIndividualModification_ExelExec" />
+		</classes>
+	</test>
+
+	<test name="7">
+		<classes>
+			<class
+				name="softpac_final.Registration_customerExecuter_individual" />
+		</classes>
+	</test>
+
+	<test name="8">
+		<classes>
+			<class
+				name="softpac_final.Registration_MemberExecuter_individual" />
+		</classes>
+	</test>
+
+	<test name="9">
+		<classes>
+			<class name="softpac_final.TransactionEntry_ExcelExecutor" />
+		</classes>
+	</test>
+
+	<test name="10">
+		<classes>
+			<class name="softpac_final.ViewFD_ExcelExecutor" />
+		</classes>
+	</test>
+
+</suite> <!-- 28JuneTestSuite -->
