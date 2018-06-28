@@ -14,14 +14,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.softpac.scripts.BrowserLauncher;
-import com.softpac.scripts.Driver;
-
 public class GetByObjectAndAct {
 
 	static WebDriver driver;
-	BrowserLauncher browserobj;
-	Driver excelex = new Driver();
+	OpenBrowser browserobj;
+	ViewFD_ExcelExecutor excelex = new ViewFD_ExcelExecutor();
 
 	public GetByObjectAndAct(WebDriver driver) {
 		this.driver = driver;
@@ -151,7 +148,7 @@ public class GetByObjectAndAct {
 			break;
 
 		case "OPENBROWSER":
-			browserobj = new BrowserLauncher(value);
+			browserobj = new OpenBrowser(value);
 			this.driver = browserobj.getDriver();
 			break;
 
