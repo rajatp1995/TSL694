@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.softpac.scripts.BrowserLauncher;
@@ -163,6 +164,13 @@ public class GetByObjectAndAct {
 		case "ASSERT":
 			assertEquals(driver.getCurrentUrl(), value);
 
+			break;
+
+		case "SELECT":
+			WebElement search1 = driver.findElement(this.getByObject(
+					objectName, objectType));
+			Select dropDown = new Select(search1);
+			dropDown.selectByVisibleText(value);
 			break;
 
 		case "STORE":
