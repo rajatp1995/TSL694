@@ -1,4 +1,4 @@
-package softpac;
+package softpac_final;
 
 import static org.testng.Assert.assertEquals;
 
@@ -110,6 +110,8 @@ public class GetByObjectAndAct {
 
 			List<WebElement> s = driver.findElements(this.getByObject(
 					objectName, objectType));
+			System.out.println(s.size()+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+			System.out.println(s.get(0).toString());
 			for (WebElement webElement : s) {
 				if (webElement.getText().contains(value)) {
 					System.out.println("Found it");
