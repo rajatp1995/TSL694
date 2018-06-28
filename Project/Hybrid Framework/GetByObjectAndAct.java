@@ -1,134 +1,218 @@
-package keywordDriven;
+package softpac;
+
+import static org.testng.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.softpac.scripts.BrowserLauncher;
+import com.softpac.scripts.Driver;
 
 public class GetByObjectAndAct {
 
-	WebDriver driver;
-	// OpenBrowser browserobj;
+	static WebDriver driver;
+	BrowserLauncher browserobj;
+	Driver excelex = new Driver();
 
 	public GetByObjectAndAct(WebDriver driver) {
 		this.driver = driver;
 	}
 
-	public void performAction(String operation, String objectName, String objectType, String value, String var) throws Exception {
+	public void performAction(String operation, String objectName,
+			String objectType, String value, String variable) throws Exception {
 		System.out.println("performing action");
 		switch (operation.toUpperCase()) {
+
 		case "CLICK":
-			// Perform click
-
-			if (objectName.contains(".") == true) {
-				objectName = objectName.split("\\.")[0];
-			}
-			driver.findElement(this.getByObject(objectName, objectType)).click();
+			driver.findElement(this.getByObject(objectName, objectType))
+					.click();
 			break;
 
-		case "SETTEXT":
-			// Set text on control
-			System.out.println("llalalalala" + value);
-			driver.findElement(this.getByObject(objectName, objectType)).sendKeys(value);
-			break;
-
-		case "GOTOURL":
-			// Get url of application
-			driver.get(value);
-			break;
-
-		case "GETTEXT":
-			// Get text of an element
-			String str = driver.findElement(this.getByObject(objectName, objectType)).getText();
-			System.out.println(str);
-			break;
-
-		case "TIMEOUT":
-			// Get url of application
-			float sleeptime = Float.parseFloat(value);
-			Thread.sleep((long) (sleeptime) * 1000);
-			break;
-
-		// for hovering
-		case "HOVER":
-			Actions membership = new Actions(driver);
-			WebElement search = driver.findElement(this.getByObject(objectName, objectType));
-			membership.moveToElement(search).build().perform();
-			break;
-		// for dropdowns under select tag
-		case "SELECT":
-			WebElement search1 = driver.findElement(this.getByObject(objectName, objectType));
-			Select dropDown = new Select(search1);
-
-			List<WebElement> lst = dropDown.getOptions();
-			int size = lst.size();
-			for (int i = 0; i < size; i++) {
-				System.out.println(lst.get(i).getText());
-			}
-			if (value.contains(".") == true) {
-				value = value.split("\\.")[0];
-			}
-
-			dropDown.selectByVisibleText(value);
-			break;
-			
 		case "CLEAR":
-			driver.findElement(this.getByObject(objectName, objectType)).clear();
+			driver.findElement(this.getByObject(objectName, objectType))
+					.clear();
 			break;
 
-		case "SELECT_LIST_ITEM":// selecting current id of created account
+		case "SWITCHTAB":
+			ArrayList<String> tabs2 = new ArrayList<String>(
+					driver.getWindowHandles());
+			driver.switchTo().window(tabs2.get(0));
+			break;
 
-			List<WebElement> list = driver.findElements(this.getByObject(objectName, objectType));
+		case "SETAMOUNT":
+			if (value.equals("nil")) {
+				System.out.println("No amount required.");
+			} else {
+				driver.findElement(this.getByObject(objectName, objectType))
+						.clear();
 
-			for (WebElement webElement : list) {
-				if (webElement.getText().contains(value)) {
-					System.out.println("Found it");
-					webElement.click();
-				}
-				System.out.println(webElement.getText());
+				driver.findElement(this.getByObject(objectName, objectType))
+						.sendKeys(value);
 			}
 
 			break;
-		// for pressing enter key through keyboard
-		case "ENTER":
-			driver.findElement(this.getByObject(objectName, objectType));
-			Actions spantagDropdown = new Actions(driver);
-			// spantagDropdown.sendKeys(Keys.ARROW_DOWN).build().perform();
 
-			spantagDropdown.sendKeys(Keys.ENTER).build().perform();
-			break;
-			
 		case "ENTER_KEY":
-			
+
 			Actions act = new Actions(driver);
 			act.sendKeys(Keys.ENTER).build().perform();
 			break;
 
-
 		case "DOWN":
-			// driver.findElement(this.getByObject(objectName,objectType));
 			Actions spantagDropdown2 = new Actions(driver);
 			spantagDropdown2.sendKeys(Keys.ARROW_DOWN).build().perform();
-			// spantagDropdown.sendKeys(Keys.ENTER).build().perform();
 			break;
-		// switching over to new tab in same browser
-		case "SWITCHTAB":
-			ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
-			driver.switchTo().window(tabs2.get(1));
+
+		case "SETTEXT":
+			driver.findElement(this.getByObject(objectName, objectType))
+					.sendKeys(value);
+
+			break;
+
+		case "SELECTCHARGES":
+			if (driver.findElement(
+					By.xpath("//*[@id=\"charges_chosen\"]/a/div/b"))
+					.isDisplayed()) {
+				driver.findElement(
+						By.xpath("//*[@id=\"charges_chosen\"]/a/div/b"))
+						.click();
+				Thread.sleep(2000);
+				List<WebElement> s = driver.findElements(this.getByObject(
+						objectName, objectType));
+
+				for (WebElement webElement : s) {
+					if (webElement.getText().contains(value)) {
+						System.out.println("Found it");
+						webElement.click();
+					}
+
+					System.out.println(webElement.getText());
+				}
+			}
+			break;
+
+		case "ENTERCHEQUE":
+			if (driver.findElement(By.xpath("//*[@id=\"chequeno\"]"))
+					.isDisplayed()) {
+				driver.findElement(this.getByObject(objectName, objectType))
+						.sendKeys(value);
+			}
+
+			break;
+
+		case "SELECT1":
+
+			List<WebElement> s = driver.findElements(this.getByObject(
+					objectName, objectType));
+			for (WebElement webElement : s) {
+				if (webElement.getText().contains(value)) {
+					System.out.println("Found it");
+					webElement.click();
+					break;
+				}
+			}
+			break;
+
+		case "GOTOURL":
+			if (driver != null)
+				driver.get(value);
+			else
+				System.out.println("driver object is null");
+			break;
+
+		case "GETTEXT":
+			String str = driver.findElement(
+					this.getByObject(objectName, objectType)).getText();
+			System.out.println(str);
+			break;
+
+		case "MOVETO":
+			Actions membership = new Actions(driver);
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			WebElement element = driver.findElement(this.getByObject(
+					objectName, objectType));
+			membership.moveToElement(element).build().perform();
+			wait.until(ExpectedConditions.visibilityOfElementLocated(this
+					.getByObject(objectName, objectType)));
+			break;
+
+		case "TIMEOUT":
+			float sleeptime = Float.parseFloat(value);
+			Thread.sleep((long) (sleeptime) * 1000);
+			break;
+
+		case "OPENBROWSER":
+			browserobj = new BrowserLauncher(value);
+			this.driver = browserobj.getDriver();
+			break;
+
+		case "CLOSEBROWSER":
+			System.out.println("attempting to close browser");
+			driver.quit();
+			System.out.println("browser closed");
+			break;
+
+		case "ASSERT":
+			assertEquals(driver.getCurrentUrl(), value);
+
+			break;
+
+		case "STORE":
+			String variableName = variable;
+			variableName = variableName.substring(2, variableName.length() - 1);
+			excelex.getVariableMap().put(variableName, value);
+			break;
+
+		case "ECHO":
+
 			/*
-			 * driver.close(); driver.switchTo().window(tabs2.get(0));
+			 * 
+			 * // Print the hashmap for (String name:
+			 * excelex.getPeopleMap().keySet()){
+			 * 
+			 * String key =name.toString(); String value3 =
+			 * excelex.getPeopleMap().get(name).toString();
+			 * System.out.println(key + " " + value3);
+			 * 
+			 * }
 			 */
+			System.out.println(excelex.getVariableMap().get(
+					variable.substring(2, variable.length() - 1)));
+
 			break;
+
+		case "VERIFYTITLE":
+
+			try {
+				assertEquals(driver.getTitle(), value);
+			} catch (AssertionError e) {
+				System.out.println("Verification Failed");
+				e.getMessage();
+			}
+			break;
+
+		case "VERIFYTEXT":
+
+			try {
+
+				assertEquals(
+						driver.findElement(
+								this.getByObject(objectName, objectType))
+								.getText(), value);
+			} catch (AssertionError e) {
+				System.out.println("Verification Failed");
+				e.getMessage();
+			}
+			break;
+
 		default:
 			break;
 		}
@@ -141,34 +225,48 @@ public class GetByObjectAndAct {
 	 * @return
 	 * @throws Exception
 	 */
-	private By getByObject(String objectName, String objectType) throws Exception {
+	private By getByObject(String objectName, String objectType)
+			throws Exception {
 		// Find by xpath
 		if (objectType.equalsIgnoreCase("XPATH")) {
+
 			return By.xpath(objectName);
 		}
 		// find by class
 		else if (objectType.equalsIgnoreCase("CLASSNAME")) {
+
 			return By.className(objectName);
+
 		}
 		// find by id
 		else if (objectType.equalsIgnoreCase("ID")) {
+
 			return By.id(objectName);
+
 		}
 		// find by name
 		else if (objectType.equalsIgnoreCase("NAME")) {
+
 			return By.name(objectName);
+
 		}
 		// Find by css
 		else if (objectType.equalsIgnoreCase("CSS")) {
+
 			return By.cssSelector(objectName);
+
 		}
 		// find by link
 		else if (objectType.equalsIgnoreCase("LINK")) {
+
 			return By.linkText(objectName);
+
 		}
 		// find by partial link
 		else if (objectType.equalsIgnoreCase("PARTIALLINK")) {
+
 			return By.partialLinkText(objectName);
+
 		} else {
 			throw new Exception("Wrong object type");
 		}
