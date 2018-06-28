@@ -1,5 +1,9 @@
-package softpac;
+package softpac_final;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
@@ -59,6 +63,7 @@ public class FD_Joint_Executor {
 	public List<String[]> getLogStatus() {
 		return logStatus;
 	}
+
 
 	@BeforeTest
 	public void setUp() throws Exception {
@@ -192,22 +197,30 @@ public class FD_Joint_Executor {
 				logStatus.clear();
 			}
 			mainRowCount++;
+			
+			/*if((i==excelSheet.getPhysicalNumberOfRows())){
+				System.out.println(excelSheet.getPhysicalNumberOfRows());
+				ExcelReportWriter exrw = new ExcelReportWriter();
+				exrw.excelReportWriter(reportFileName, mainSheetRowCount);
+			}*/
 		}
 
 	}
 
-	@AfterClass
+	@AfterTest
 	public void tearDown() throws IOException {
-
 		ExcelReportWriter exrw = new ExcelReportWriter();
 		exrw.excelReportWriter(reportFileName, mainSheetRowCount);
-
 		driver.quit();
+
+		
+
+		//driver.quit();
 		java.util.Date date = new java.util.Date();
 		System.out.println("\n\nExecution Log - End Time - "
 				+ new Timestamp(date.getTime()));
 	}
 
-	int resultCellNum = 0;
+	//int resultCellNum = 0;
 
 }

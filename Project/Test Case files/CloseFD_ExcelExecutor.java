@@ -1,4 +1,4 @@
-package softpac;
+package softpac_final;
 
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeTest;
@@ -88,13 +88,13 @@ public class CloseFD_ExcelExecutor {
 	int mainRowCount = 1;
 
 	@Test(dataProvider = "DP1", dataProviderClass = CallDDT.class)
-	public void testLogin(String action,String memberID, String accountNumber) throws Exception {
+	public void testLogin(String action,String memberID, String accountNumber, String action_confirm) throws Exception {
 		ArrayList<String> data = new ArrayList<String>();
 		
 		data.add(action);
 		data.add(memberID);
 		data.add(accountNumber);
-		
+		data.add(action_confirm);
 		
 
 		GetByObjectAndAct getAndAct = new GetByObjectAndAct(driver);

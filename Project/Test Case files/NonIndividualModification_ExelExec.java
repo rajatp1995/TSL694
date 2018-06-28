@@ -1,5 +1,8 @@
-package keywordDriven;
+package softpac_final;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
@@ -204,7 +207,5 @@ public class NonIndividualModification_ExelExec {
 		java.util.Date date = new java.util.Date();
 		System.out.println("\n\nExecution Log - End Time - " + new Timestamp(date.getTime()));
 	}
-
-	int resultCellNum = 0;
 
 }

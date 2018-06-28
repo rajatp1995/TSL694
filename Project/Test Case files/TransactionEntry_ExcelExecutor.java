@@ -1,5 +1,9 @@
-package softpac;
+package softpac_final;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
@@ -60,6 +64,7 @@ public class TransactionEntry_ExcelExecutor {
 		return logStatus;
 	}
 
+	
 	@BeforeTest
 	public void setUp() throws Exception {
 		java.util.Date date = new java.util.Date();
@@ -198,7 +203,8 @@ public class TransactionEntry_ExcelExecutor {
 
 	}
 
-	@AfterClass
+	
+	@AfterTest
 	public void tearDown() throws IOException {
 
 		ExcelReportWriter exrw = new ExcelReportWriter();
@@ -209,7 +215,5 @@ public class TransactionEntry_ExcelExecutor {
 		System.out.println("\n\nExecution Log - End Time - "
 				+ new Timestamp(date.getTime()));
 	}
-
-	int resultCellNum = 0;
 
 }

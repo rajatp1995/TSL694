@@ -1,5 +1,8 @@
-package softpac;
+package softpac_final;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
@@ -156,8 +159,6 @@ public class MemRegNI_Joint_ExcelExecutor {
 								.getCell(2).toString(), row.getCell(3)
 								.toString(), data.get(counter), row.getCell(5)
 								.toString());
-
-						System.out.println(counter + "counter in tryyyy");
 						counter++;
 					} else {
 
@@ -178,22 +179,16 @@ public class MemRegNI_Joint_ExcelExecutor {
 					logStatus.add(sStatus);
 
 				} catch (Exception e) {
-					System.out.println("Counter in catch val : " + counter);
 					System.out.println(data);
 					System.out.println("fail =" + e.getMessage());
 					String[] fStatus = { "failure", e.getMessage() };
 					logStatus.add(fStatus);
-					// int numOfCellsInCurrentRow =
-					// row.getPhysicalNumberOfCells();
-					// done for incrementing counter if data driven value
-					// encounters an error, else we don't need to increment the
-					// counter.
+
 					for (Cell cell : row) {
 						if (cell.toString().contains("!&")) {
 							counter++;
 						}
 					}
-					// counter++;
 				}
 
 				ExcelWriter excelWriter = new ExcelWriter();
@@ -242,7 +237,5 @@ public class MemRegNI_Joint_ExcelExecutor {
 		System.out.println("\n\nExecution Log - End Time - "
 				+ new Timestamp(date.getTime()));
 	}
-
-	int resultCellNum = 0;
 
 }

@@ -1,5 +1,9 @@
-package softpac;
+package softpac_final;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
@@ -87,7 +91,7 @@ public class FD_Single_Executor {
 
 	int mainRowCount = 1;
 
-	@Test(dataProvider = "DP1", dataProviderClass = CallDDT.class)
+	@Test(dataProvider = "DP1", dataProviderClass = CallDDT.class, priority=0)
 	public void testLogin(String nominee_name, String amount, String year,
 			String month, String day) throws Exception {
 		ArrayList<String> data = new ArrayList<String>();
@@ -191,22 +195,20 @@ public class FD_Single_Executor {
 				logStatus.clear();
 			}
 			mainRowCount++;
+			
 		}
 
 	}
 
-	@AfterClass
+	@AfterTest
 	public void tearDown() throws IOException {
-
 		ExcelReportWriter exrw = new ExcelReportWriter();
 		exrw.excelReportWriter(reportFileName, mainSheetRowCount);
-
 		driver.quit();
+
 		java.util.Date date = new java.util.Date();
 		System.out.println("\n\nExecution Log - End Time - "
 				+ new Timestamp(date.getTime()));
 	}
-
-	int resultCellNum = 0;
 
 }

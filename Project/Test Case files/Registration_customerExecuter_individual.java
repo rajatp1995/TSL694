@@ -1,5 +1,8 @@
-package softpac;
+package softpac_final;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
@@ -238,7 +241,5 @@ public class Registration_customerExecuter_individual {
 		System.out.println("\n\nExecution Log - End Time - "
 				+ new Timestamp(date.getTime()));
 	}
-
-	int resultCellNum = 0;
 
 }
